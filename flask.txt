@@ -1,0 +1,42 @@
+What is Flask
+=>Micro web framework written in Python 
+=>Micro Means its lightweight  and doesn't include everything by default 
+=>Used to build web applications ,Apis ,dashboards
+
+    Steps to use Flask
+1.install flask
+    pip install flask 
+2.Import Flask class from flask framework
+    from flask import Flask
+3.create an app object which is the Instance of the class Flask with argument __name__
+    app=Flask(__name__)
+
+4.create routes
+    =>What is route -> path used to connect a URL with a Python Function 
+    =>always starts with a /
+
+    How to create a route 
+        @app.route('/')
+        def home():
+            return 'Hello world'
+Routes to create:
+'/'
+'/products'
+'/sales'
+'/stock'
+
+5.run the app
+    app.run()
+
+=>Each Function on a route should return an html file
+=>In Flask All HTML file must be in a folder called templates
+=>In Flask ALL css,images and javascript files must be in folder called static   
+=>render_template function in flask is used to render html files
+=>you must import render_template from flask before using it
+
+            Task
+1.Create index,products ,sales and stock html files inside the templates folder 
+2.create folder static for css and js files
+3.Render each html file to its own route
+
+        

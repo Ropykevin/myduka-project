@@ -85,9 +85,27 @@ print(sales)
 
 
 
+# write a function that gets proft per product
 
-
-
+def product_profit():
+    query='select p.name,p.id ,sum((p.selling_price-p.buying_price)*s.quantity) as total_profit from products as p join sales as s on p.id=s.pid group by p.name,p.id;' 
+    curr.execute(query)
+    profit=curr.fetchall()
+    return profit
+    
+my_profit=product_profit()
+print('profit')
+print(my_profit)
+# write a function that gets sales per product
+def product_sales():
+    query='select p.name,p.id ,sum(p.selling_price*s.quantity) as total_profit from products as p join sales as s on p.id=s.pid group by p.name,p.id;' 
+    curr.execute(query)
+    sales=curr.fetchall()
+    return sales
+    
+my_sales=product_sales()
+print('sales')
+print(my_sales)
 
 
 
