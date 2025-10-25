@@ -48,12 +48,12 @@ def fetch_data(table):
     return data
 
 
-products=fetch_data('products')
-print(products)
-stock=fetch_data('stock')
-print(stock)
-sales=fetch_data('sales')
-print(sales)
+# products=fetch_data('products')
+# print(products)
+# stock=fetch_data('stock')
+# print(stock)
+# sales=fetch_data('sales')
+# print(sales)
 
 # insert products 
 # curr.execute("insert into products(name,buying_price,selling_price)values('Ginger',20,30);")
@@ -75,10 +75,10 @@ def insert_sales(values):
     curr.execute(query,values)
     connect.commit()
     
-new_sale=(2,5)
-insert_sales(new_sale)
-sales = fetch_data('sales')
-print(sales)
+# new_sale=(2,5)
+# insert_sales(new_sale)
+# sales = fetch_data('sales')
+# print(sales)
 
 # function to get profit per product 
 def product_profit():
@@ -87,8 +87,8 @@ def product_profit():
 	profit=curr.fetchall()
 	return profit
 
-myprofits=product_profit()
-print(f'my products profit {myprofits}')
+# myprofits=product_profit()
+# print(f'my products profit {myprofits}')
 
 # function to get sales per product 
 def product_sale():
@@ -96,6 +96,7 @@ def product_sale():
 	curr.execute(query)
 	sales=curr.fetchall()
 	return sales
-mysales=product_sale()
 
-print(f'my products sales {mysales}')
+# mysales=product_sale()
+
+# print(f'my products sales {mysales}')

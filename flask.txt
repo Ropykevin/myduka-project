@@ -29,7 +29,7 @@ Routes to create:
     app.run()
 
 =>Each Function on a route should return an html file
-=>In Flask All HTML file must be in a folder called templates
+=>In Flask All HTML files must be in a folder called templates
 =>In Flask ALL css,images and javascript files must be in folder called static   
 =>render_template function in flask is used to render html files
 =>you must import render_template from flask before using it
@@ -39,4 +39,27 @@ Routes to create:
 2.create folder static for css and js files
 3.Render each html file to its own route
 
-        
+NB=>always update your github repo
+    commands to update 
+    1.git add .
+    2.git commit -m "name of the change"
+    3.git push origin branch name
+
+
+
+    Flask Day 2
+=>fetch data on main.py
+1.import the fetch data function to main
+2.call the function to fetch data on specific routes
+
+=>Display data on the ui using JINJA
+=>Templating engine used to write python like code on HTML
+
+    How to use Jinja
+1.Variables are written inside double curly braces {{variable}} in HTML  and the variable must be declared on render_template function in python
+2.A python operation is written inside single curly brace with percent bsigns  {% for i in sequence %} and the operation must be closed {% endfor %}
+
+        Task
+1.Display sales and stock on the page 
+2.make all html files bootstrap enabled 
+3.create tables on products,sales,and stock html files with random data with columns similar to the ones on the database
