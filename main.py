@@ -19,12 +19,15 @@ def products():
 
 @app.route('/sales')
 def sales():
-    return render_template('sales.html')
+    sales=fetch_data('sales')
+    return render_template('sales.html',sales=sales)
 
 # stocks route 
 
 @app.route('/stock')
 def stock():
-    return render_template('stock.html')
+    stock=fetch_data('stock')
+    return render_template('stock.html',stock=stock)
 
 app.run()
+

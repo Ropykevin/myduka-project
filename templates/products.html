@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <h1>My products page</h1>
-    <p>{{prods}}</p>
-    
+
+    <table class=" table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Buying Price</th>
+                <th>Selling Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prod in prods %}
+            <tr>
+                <td>{{prod[0]}}</td>
+                <td>{{prod[1]}}</td>
+                <td>{{prod[2]}}</td>
+                <td>{{prod[3]}}</td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+
+    </table>
 </body>
+
 </html>

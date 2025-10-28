@@ -1,65 +1,215 @@
-What is Flask
-=>Micro web framework written in Python 
-=>Micro Means its lightweight  and doesn't include everything by default 
-=>Used to build web applications ,Apis ,dashboards
 
-    Steps to use Flask
-1.install flask
-    pip install flask 
-2.Import Flask class from flask framework
-    from flask import Flask
-3.create an app object which is the Instance of the class Flask with argument __name__
-    app=Flask(__name__)
+# 🐍 Flask Training Notes
 
-4.create routes
-    =>What is route -> path used to connect a URL with a Python Function 
-    =>always starts with a /
+---
 
-    How to create a route 
-        @app.route('/')
-        def home():
-            return 'Hello world'
-Routes to create:
-'/'
-'/products'
-'/sales'
-'/stock'
+## 🚀 What is Flask
+- **Flask** is a *micro web framework* written in **Python**.  
+- **Micro** means it’s lightweight and doesn’t include everything by default (like authentication or ORM).  
+- Flask is used to build **Web Applications**, **APIs**, and **Dashboards**.
 
-5.run the app
-    app.run()
+---
 
-=>Each Function on a route should return an html file
-=>In Flask All HTML files must be in a folder called templates
-=>In Flask ALL css,images and javascript files must be in folder called static   
-=>render_template function in flask is used to render html files
-=>you must import render_template from flask before using it
+## ⚙️ Steps to Use Flask
 
-            Task
-1.Create index,products ,sales and stock html files inside the templates folder 
-2.create folder static for css and js files
-3.Render each html file to its own route
+### **1. Install Flask**
+```bash
+pip install flask
+````
 
-NB=>always update your github repo
-    commands to update 
-    1.git add .
-    2.git commit -m "name of the change"
-    3.git push origin branch name
+---
 
+### **2. Import Flask Class**
 
+```python
+from flask import Flask
+```
 
-    Flask Day 2
-=>fetch data on main.py
-1.import the fetch data function to main
-2.call the function to fetch data on specific routes
+---
 
-=>Display data on the ui using JINJA
-=>Templating engine used to write python like code on HTML
+### **3. Create a Flask App**
 
-    How to use Jinja
-1.Variables are written inside double curly braces {{variable}} in HTML  and the variable must be declared on render_template function in python
-2.A python operation is written inside single curly brace with percent bsigns  {% for i in sequence %} and the operation must be closed {% endfor %}
+```python
+app = Flask(__name__)
+```
 
-        Task
-1.Display sales and stock on the page 
-2.make all html files bootstrap enabled 
-3.create tables on products,sales,and stock html files with random data with columns similar to the ones on the database
+> `app` is an instance of the Flask class.
+
+---
+
+### **4. Create Routes**
+
+* A **route** connects a **URL path** to a **Python function**.
+* Every route starts with a **slash (/)**.
+
+Example:
+
+```python
+@app.route('/')
+def home():
+    return 'Hello, World!'
+```
+
+---
+
+### **Routes to Create**
+
+| Route       | Description   |
+| ----------- | ------------- |
+| `/`         | Homepage      |
+| `/products` | Products Page |
+| `/sales`    | Sales Page    |
+| `/stock`    | Stock Page    |
+
+---
+
+### **5. Run the App**
+
+```python
+app.run()
+```
+
+---
+
+### **Important Notes**
+
+* Each route’s function should **return an HTML file**.
+* In Flask:
+
+  * All **HTML files** must be inside a folder called **`templates`**
+  * All **CSS**, **JS**, and **images** must be inside a folder called **`static`**
+
+Render an HTML file:
+
+```python
+from flask import render_template
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+```
+
+---
+
+## 🧠 Task 1
+
+1. Create the following HTML files inside the **`templates`** folder:
+
+   * `index.html`
+   * `products.html`
+   * `sales.html`
+   * `stock.html`
+2. Create a **`static`** folder for CSS and JS files.
+3. Render each HTML file to its respective route.
+
+---
+
+## 💻 GitHub Commands
+
+Always update your GitHub repo after making changes:
+
+```bash
+git add .
+git commit -m "Describe your changes"
+git push origin <branch-name>
+```
+
+---
+
+# 🧩 Flask Day 2 — Fetching and Displaying Data
+
+---
+
+## **1. Fetch Data**
+
+* Import your data-fetching function into **main.py**
+* Call the function inside specific routes to get data
+
+---
+
+## **2. Display Data Using Jinja2**
+
+**Jinja2** is Flask’s templating engine — it allows you to write Python-like code inside HTML.
+
+### 🧱 Syntax Basics
+
+* Variables:
+
+  ```html
+  {{ variable }}
+  ```
+
+  *(The variable must be passed inside `render_template` in your Flask route)*
+
+* Loops & Logic:
+
+  ```html
+  {% for item in sequence %}
+      <p>{{ item }}</p>
+  {% endfor %}
+  ```
+
+---
+
+## 🧠 Task 2
+
+1. Display **sales** and **stock** data on their pages.
+2. Make all HTML files **Bootstrap enabled**.
+3. Create **tables** on `products.html`, `sales.html`, and `stock.html` with random data similar to your database columns.
+
+---
+
+# 🧮 Flask Day 3 — Display Data in Tables
+
+---
+
+## **Goal**
+
+Display fetched data inside HTML tables using **Jinja2 loops**.
+
+Example:
+
+```html
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Product Name</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+```
+
+---
+
+## 🧠 Task 3
+
+1. Add a **Navbar** on each HTML page.
+2. Create a **Modal Form** to add:
+
+   * Products
+   * Stock
+   * Sales
+3. Style your project using **Bootstrap**.
+4. Make the homepage **visually appealing**.
+5. Push all changes to **GitHub**.
+
+---
+
+✨ **Keep practicing and experimenting!**
+Each day’s tasks build on the previous one — by Day 3 you’ll have a functional, styled multi-page Flask app with templates, routes, and Bootstrap integration.
+
+```
+
+---
+```
