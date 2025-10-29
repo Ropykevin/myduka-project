@@ -79,3 +79,33 @@ update github
 2.Create a modal with a form to add products ,stock and  sales *
 3.style your project
 4.make homepage appealing
+
+
+    Flask Day 4
+=>Navigation using Navbar
+=>we write the routes on the href attribute
+
+        Posting Data (UI=>server=>Database)
+=>You can send data from form on UI to the server-side flask route which then stores it in the database 
+
+        HTTP Methods 
+1.GET ->used when fetching data from a resource 
+2.POST ->used when sending data to a resource(e.g submitting a form)
+
+    Important Notes
+=>Every form input Must have a name attribute ->flask uses this to access the form data
+=>In main.py ,Create route that:
+    1.checks HTTP method (GET or POST)
+    2.Receives form data from the UI
+    3.call the insert function to add data to the database
+
+    Request,Redirect,url_for  in Flask
+    1.Request
+=>used to receive data from the form(ui->server)
+
+    2.Redirect
+=>Redirect redirects the user to another url after perfoming an action
+    3.url_for
+=>Url_for takes the function name then redirects to the route 
+
+NB=>ON the form element we must have Action attribute with route as the value and method attribute with post as the value 
