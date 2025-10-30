@@ -111,7 +111,6 @@ update github
 NB=>ON the form element we must have Action attribute with route as the value and method attribute with post as the value 
 
         Flask Day 5 (Adding Sales & Stock Functionality)
-
 Today we focus on adding Sales and Stock functionality the right way  using dynamic product data from the database.
 
 We’ll make the sales form more interactive by fetching all available products and displaying them in a dropdown (select) list instead of manually entering product IDs.
@@ -170,3 +169,97 @@ Fetch all products to display in the form.
 Use a <select> for product selection.
 Add a POST route to handle adding stock.
 Redirect to the stock page after submission.
+
+        Flask Day 6
+=>Project Structure 
+=>How to link Images,css and js  to html files
+=>Datatables 
+
+        Flask Project Structure 
+A good Flask project structure helps in organizing your application for scalability and readability.
+
+project/
+│
+├── static/
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+├── templates/
+│   ├── base.html
+│   ├── dashboard.html
+│   └── other_templates.html
+│
+├── main.py
+└── database.py
+
+=>static/ → Stores all your static assets like CSS, JS, and images.
+=>templates/ → Contains all HTML templates rendered by Flask.
+=>app.py → Your main Flask application file.
+=>database.py → file perfoming database operations.
+
+Linking Static Files
+
+Flask uses the url_for() function to link static files inside templates.
+Example:
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+DataTables
+What is DataTables?
+
+DataTables is a JavaScript library built on jQuery that enhances HTML tables with:
+
+Pagination
+Search and filtering
+Sorting and styling
+Steps to Implement DataTables
+1.Include CSS Link
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+
+2.Include jQuery CDN (Must be Above DataTables JS)
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+
+3.Include DataTables JS Link
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+4.Initialize DataTable
+
+<script>
+          let table = new DataTable('#table');
+
+</script>
+
+5.Ensure the Table ID Matches
+
+<table id="myTable" class="display">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Product A</td>
+            <td>100</td>
+        </tr>
+    </tbody>
+</table>
+
+Do the same thing we have done on products table to sales and stock
+Expected Outcome
+=>By the end of Day 6, you should be able to:
+1.Organize your Flask project using a clear folder structure.
+2.Link images, CSS, and JavaScript files correctly.
+3.Implement DataTables for enhanced table functionality.
+        Task
+Create a route named /dashboard in your Flask app.
+Render a dashboard.html file .
