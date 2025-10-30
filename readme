@@ -109,3 +109,64 @@ update github
 =>Url_for takes the function name then redirects to the route 
 
 NB=>ON the form element we must have Action attribute with route as the value and method attribute with post as the value 
+
+        Flask Day 5 (Adding Sales & Stock Functionality)
+
+Today we focus on adding Sales and Stock functionality the right way  using dynamic product data from the database.
+
+We’ll make the sales form more interactive by fetching all available products and displaying them in a dropdown (select) list instead of manually entering product IDs.
+
+Steps to Add Sales
+
+1. Fetch Products for the Sales Page
+Before making a sale, we need to display all products fetched from the database:
+=> create a variable on render_template e.g(products = products )
+python
+<!-- code -->
+@app.route('/sales')
+def sales():
+    products = fetch_data('products')
+    return render_template('sales.html', products=products)
+<!-- end -->
+This makes all products available inside the HTML page through the products variable.
+
+2. Create the Sales Form in Modal
+=>Each form input must have a name attribute.
+<!-- code -->
+<label for="pid">Choose a product:</label>
+<select name="pid" id="pid" class="form-control">
+  {% for product in products %}
+    <option value="{{ product[0] }}">{{ product[1] }}</option>
+  {% endfor %}
+</select>
+
+<br>
+
+<label for="quantity">Quantity:</label>
+<input type="number" name="quantity" id="quantity" class="form-control">
+
+<!-- end -->
+
+3.Add the /add_sales Route
+=>This route handles form submission and database insertion.
+
+<!-- code -->
+@app.route('/add_sales', methods=['POST'])
+def add_sales():
+    if request.method == 'POST':
+        pid = request.form['pid']
+        quantity = request.form['quantity']
+        new_sale=(pid, quantity)
+        insert_sales(new_sale)
+        return redirect(url_for('sales'))
+    return redirect(url_for('sales'))
+
+<!-- end -->
+
+        TASK
+=>Do the Same for Stock
+Repeat the same logic for the Stock page:
+Fetch all products to display in the form.
+Use a <select> for product selection.
+Add a POST route to handle adding stock.
+Redirect to the stock page after submission.

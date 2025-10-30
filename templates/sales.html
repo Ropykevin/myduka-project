@@ -28,6 +28,61 @@
             </div>
         </nav>
     <h1>My sales page</h1>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Make Sale
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/make_sales" method="post" class="form-control">
+                        <label for="pid">Select Product</label><br>
+                        <select name="pid" id="pid">
+                            {% for product in products %}
+                            <option value="{{product[0]}}">{{product[1]}}</option>
+                            {% endfor %}
+                        </select><br>
+                        <label for="qty">Quantity</label><br>
+                        <input type="number" id="qty" name="qty"><br>
+                        
+                        <button type="submit" class="btn btn-primary">Make Sale</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>Product ID</th>
+            <th>Quantity</th>
+            <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales %}
+            <tr>
+                <td>{{sale[0]}}</td>
+                <td>{{sale[1]}}</td>
+                <td>{{sale[2]}}</td>
+                <td>{{sale[3]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
