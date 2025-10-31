@@ -263,3 +263,5 @@ Expected Outcome
         Task
 Create a route named /dashboard in your Flask app.
 Render a dashboard.html file .
+have a navbar on dashboard
+add dashboad navigation to each page on your application using 

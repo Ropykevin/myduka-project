@@ -82,7 +82,7 @@ def insert_sales(values):
 
 # function to get profit per product 
 def product_profit():
-	query='Select p.name,p.id,sum((p.selling_price-p.buying_price)*s.quantity) as profit from sales as s inner join products as p on s.pid=p.id group by p.name,p.id;'
+	query='Select p.name,sum((p.selling_price-p.buying_price)*s.quantity) as profit from sales as s inner join products as p on s.pid=p.id group by p.name;'
 	curr.execute(query)
 	profit=curr.fetchall()
 	return profit
