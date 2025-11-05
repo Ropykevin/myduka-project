@@ -87,6 +87,20 @@ def product_sales():
     return sales
     
 
+# sales per day 
+
+def sales_day():
+    query='SELECT DATE(s.created_at) AS day,SUM(p.selling_price * s.quantity) AS total_sales FROM sales AS s JOIN products AS p ON s.pid = p.id GROUP BY DATE(s.created_at) ORDER BY DATE(s.created_at);'
+    curr.execute(query)
+    data=curr.fetchall()
+    return data
+
+# psales=sales_day()
+# print(psales)
 
 
-
+# insert user
+def insert_users(values):
+    query = 'insert into users(full_name,email,password)values(%s,%s,%s);'
+    curr.execute(query,values)
+    conn.commit()

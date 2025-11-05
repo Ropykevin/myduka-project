@@ -100,3 +100,29 @@ def product_sale():
 # mysales=product_sale()
 
 # print(f'my products sales {mysales}')
+
+# sales per day
+
+def sales_day():
+    query = 'Select date(s.created_at),sum(p.selling_price*s.quantity) as total_sales from sales as s inner join products as p on s.pid=p.id group by date(s.created_at);'
+    curr.execute(query)
+    data=curr.fetchall()
+    return data
+
+# profit per day
+
+
+# def sales_day():
+#     query = 'Select p.name,p.id,date(s.created_at),sum(p.selling_price*s.quantity) as total_sales from sales as s inner join products as p on s.pid=p.id group by p.name,p.id,date(s.created_at);'
+#     curr.execute(query)
+#     data = curr.fetchall()
+#     return data 
+
+# create a function that inserts users
+# insert into users(columns)values() 
+
+def insert_users(user_values):
+    query='insert into users (full_name,email,password)values(%s,%s,%s);'
+    curr.execute(query,user_values)
+    connect.commit()
+
