@@ -1,17 +1,54 @@
-import psycopg2
+# import psycopg2
+import sqlite3
 # connect to the postgress database
-connect=psycopg2.connect(
-    host='localhost',
-    user='postgres',
-    port=5432,
-    dbname='myduka_db',
-    password='Kevin254!'
-)
-
+# connect=psycopg2.connect(
+#     host='localhost',
+#     user='postgres',
+#     port=5432,
+#     dbname='myduka_db',
+#     password='Kevin254!'
+# )
+connect = sqlite3.connect("mydatabase.db")
 # declare cursor to perfom database operations
 curr=connect.cursor()
-
 # fetch products 
+
+curr.execute("""
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL
+)
+""")
+
+curr.execute("""
+CREATE TABLE IF NOT EXISTS products (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    buying_price REAL NOT NULL,
+    selling_price REAL NOT NULL
+)
+""")
+
+curr.execute("""
+CREATE TABLE IF NOT EXISTS stock (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    pid INTEGER NOT NULL,
+    stock_quantity INTEGER NOT NULL,
+    FOREIGN KEY (pid) REFERENCES products(id)
+)
+""")
+
+curr.execute("""
+CREATE TABLE IF NOT EXISTS sales (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    pid INTEGER NOT NULL,
+    quantity INTEGER NOT NULL,
+    created_at TEXT DEFAULT (datetime('now')),
+    FOREIGN KEY (pid) REFERENCES products(id)
+)
+""")
 
 
 # def fetch_products():
@@ -126,3 +163,11 @@ def insert_users(user_values):
     curr.execute(query,user_values)
     connect.commit()
 
+# check if user exist
+def check_email(email):
+    query='select * from users where email=%s'
+    curr.execute(query,(email,))
+    data=curr.fetchone()
+    return data
+
+# print(check_email('dan@mail.com'))

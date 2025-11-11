@@ -104,3 +104,14 @@ def insert_users(values):
     query = 'insert into users(full_name,email,password)values(%s,%s,%s);'
     curr.execute(query,values)
     conn.commit()
+    
+    
+    
+# check if user exist
+
+def check_email(email):
+    query='select * from users where email=%s;'
+    curr.execute(query,(email,))
+    data=curr.fetchone()
+    return data
+
