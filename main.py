@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for,flash,session
-from dbservice import fetch_data, insert_products, insert_sales, product_profit, sales_day, insert_users, check_email
+from dbservice import fetch_data, insert_products, insert_sales, product_profit, sales_day, insert_users, check_email,update_prod
 from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
@@ -20,7 +20,7 @@ def prods():
     if 'email' in session:
         prods = fetch_data('products')
     else:
-        flash('login to access this page')
+        flash('login to access this page ', 'danger')
         return redirect(url_for('login'))
     return render_template('products.html', prods=prods)
 
@@ -39,13 +39,30 @@ def add_products():
         return redirect(url_for('prods'))
     return redirect(url_for('prods'))
 
+# route to update products
+@app.route('/update_product',methods=['GET','POST'])
+def update_product():
+    if request.method=='POST':
+        id=request.form['id']
+        pname = request.form['name']
+        bp = request.form['buying_price']
+        sp = request.form['selling_price']
+        update_prod(pname,bp,sp,id)
+        flash('product updated')
+        return redirect(url_for('prods'))
+    return redirect(url_for('prods'))
+
 # Sales route
 
 @app.route('/sales')
 def sales():
-    sales = fetch_data('sales')
-    # fetch products to display on select
-    products = fetch_data('products')
+    if 'email' in session:
+        sales = fetch_data('sales')
+        # fetch products to display on select
+        products = fetch_data('products')
+    else:
+        flash('login to access this page ', 'danger')
+        return redirect(url_for('login'))
     return render_template('sales.html', sales=sales, products=products)
 
 # make sale route
@@ -102,7 +119,7 @@ def dashboard():
             dates.append(str(i[0]))
             dsales.append(float(i[1]))
     else:
-        flash('login to access this page')
+        flash('login to access this page','danger')
         return redirect(url_for('login'))
 
     return render_template('dashboard.html', product_names=product_names, product_profits=product_profits, dates=dates, dsales=dsales)
@@ -162,7 +179,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('email')
-    flash('Youve been logged out')
+    flash('Youve been logged out', 'success')
     return redirect(url_for('login'))
 
 # id,name,email,password

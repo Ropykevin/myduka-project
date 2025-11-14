@@ -21,14 +21,17 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
+                    {% if 'email' not in session %}
                     <a class="nav-link " href="/">Home</a>
+                    <a class="nav-link active" href="/login">Login</a>
+                    <a class="nav-link" href="/register">Register</a>
+                    {% else %}
                     <a class="nav-link " aria-current="page" href="/products">Products</a>
                     <a class="nav-link" href="/sales">Sales</a>
                     <a class="nav-link active" href="/stock">Stock</a>
                     <a class="nav-link" href="/dashboard">Dashboard</a>
-                    <a class="nav-link active" href="/login">Login</a>
-                    <a class="nav-link" href="/register">Register</a>
                     <a class="nav-link" href="/logout">Logout</a>
+                    {% endif %}
 
                 </div>
             </div>
@@ -40,7 +43,7 @@
         {% if messages %}
         <ul class=flashes>
             {% for category, message in messages %}
-            <li class="{{ category }}">{{ message }}</li>
+            <li class="alert alert-{{category}} list-unstyled">{{ message }}</li>
             {% endfor %}
         </ul>
         {% endif %}
@@ -51,10 +54,10 @@
     </div>
 
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="//cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

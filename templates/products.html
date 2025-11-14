@@ -51,6 +51,7 @@
             <th>Product Name</th>
             <th>Buying Price</th>
             <th>Selling Price</th>
+            <th>Edit</th>
         </tr>
     </thead>
     <tbody>
@@ -60,6 +61,41 @@
             <td>{{prod[1]}}</td>
             <td>{{prod[2]}}</td>
             <td>{{prod[3]}}</td>
+            <td>
+                <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editproduct{{prod[0]}}">
+  Edit
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="editproduct{{prod[0]}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit product</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/update_product" method="post" class="form-control">
+                    <input type="hidden" name="id" value="{{prod[0]}}">
+                    <label for="name">Product Name</label><br>
+                    <input type="text" id="name" name="name" value="{{prod[1]}}"><br>
+                    <label for="bp">Buying Price</label><br>
+                    <input type="number" id="bp" name="buying_price" value="{{prod[2]}}"><br>
+                    <label for="sp">Selling Price</label><br>
+                    <input type="number" id="sp" name="selling_price" value="{{prod[3]}}"><br>
+                    <button type="submit" class="btn btn-primary">Edit Product</button>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+</td>
         </tr>
         {% endfor %}
 

@@ -46,7 +46,7 @@ curr=conn.cursor()
 # fetch data
 
 def fetch_data(table_name):
-    curr.execute(f'select * from {table_name}')
+    curr.execute(f'select * from {table_name} ')
     data=curr.fetchall()
     return data
 
@@ -115,3 +115,7 @@ def check_email(email):
     data=curr.fetchone()
     return data
 
+def update_prod(name,buyp,sprice,id):
+    query = 'update products set name=%s ,buying_price=%s,selling_price=%s where id=%s;'
+    curr.execute(query, (name, buyp, sprice, id))
+    conn.commit()
